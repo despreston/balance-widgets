@@ -1,0 +1,19 @@
+{
+  "name": "balance-widgets",
+  "version": "1.0.0",
+  "description": "Widgets for Balance platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/despreston/balance-widgets.git"
+  },
+  "author": "Des Preston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/despreston/balance-widgets/issues"
+  },
+  "homepage": "https://github.com/despreston/balance-widgets#readme"
+}
