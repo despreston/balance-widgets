@@ -1,6 +1,6 @@
 <style type='text/css'>
-  .project-list-item {
-    font-family: "Merienda One", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  #project-list-item {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #404040;
     border-radius: 6px;
     height: 200px;
@@ -10,7 +10,7 @@
     flex-direction: row;
   }
 
-  .content {
+  #project-list-item .content {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -18,19 +18,19 @@
     justify-content: space-between;
   }
 
-  .title {
+  #project-list-item .title {
     font-size: 1.25em;
     font-weight: bold;
     padding-bottom: 5px;
   }
 
-  .text {
+  #project-list-item .text {
     color: #C0C0C0;
     letter-spacing: 1.05;
     font-size: 0.70em;
   }
 
-  .note {
+  #project-list-item .note {
     font-size: 0.95em;
     padding-top: 8px;
     line-height: 1.5;
@@ -39,26 +39,34 @@
     word-wrap: break-word;
   }
 
-  .footer {
+  #project-list-item .footer {
     border-top: 1px solid #ECF0F1;
-    padding-top: 5px;
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
   }
 
-  .date {
+  #project-list-item .date {
     padding-top: 15px;
     letter-spacing: 1.0;
   }
 
-  .status {
+  #project-list-item .status {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     display: flex;
     overflow-x: hidden;
     width: 10px;
   }
+
+  #project-list-item .nudge-text {
+    margin-left: 10px;
+    font-size: 0.75em;
+    letter-spacing: 1.0;
+  }
 </style>
 
-<div class='project-list-item'>
+<div id='project-list-item'>
   <div class='content'>
     <span class='title'>{{project.title}}</span>
     {{#if isFinished}}
@@ -66,14 +74,14 @@
     {{else if project.Past}}
       <div>
         <div class='text'>LATEST COMPLETED</div>
-        <div class='note'>{{project.Past.content}}</div>
-        <div class='text date'>{{lastUpdated}}</div>
+        <div class='note'>{{project.Past.content}}</div>  
       </div>
     {{else}}
       <div class='message'>Nothing done for this project</div>
     {{/if}}
     <div class='footer'>
-      test
+      {{> avatar-collection users=project.nudgeUsers}}
+      <span class='text nudge-text'>{{nudgeText}}</span>
     </div>
   </div>
   <div class='status'>{{> status}}</div>

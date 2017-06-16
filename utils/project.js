@@ -2,14 +2,16 @@
  * Fetches the project info from Balance api
  * /projects/{project}
  */
+const https  = require('https');
 const http   = require('http');
 const config = require('../common');
 
 module.exports = (request, reply) => {
   const { host, protocol, port } = config.api;
   const { project } = request.params;
+  const protocolFn = protocol === 'https' ? https : http;
 
-  http.get(`${protocol}://${host}:${port}/projects/${project}`, res => {
+  protocolFn.get(`${protocol}://${host}:${port}/projects/${project}`, res => {
     const { statusCode } = res;
 
     if (statusCode < 200 || statusCode > 299) {

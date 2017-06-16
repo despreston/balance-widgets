@@ -12,7 +12,7 @@
     "api": {
       "host": "api.getbalanceapp.com",
       "protocol": "https",
-      "port": 80
+      "port": 443
     }
   }
 }
