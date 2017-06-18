@@ -21,6 +21,7 @@ server.register(require('vision'), err => {
     partialsPath: 'templates/partials'
   });
 
+  server.realm.modifiers.route.prefix = config.prefix;
   server.route(routes);
 });
 

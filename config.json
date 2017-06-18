@@ -1,6 +1,7 @@
 {
   "dev": {
     "port": 8000,
+    "prefix": "",
     "api": {
       "host": "localhost",
       "protocol": "http",
@@ -9,6 +10,7 @@
   },
   "prod": {
     "port": 8000,
+    "prefix": "/widgets",
     "api": {
       "host": "api.getbalanceapp.com",
       "protocol": "https",
