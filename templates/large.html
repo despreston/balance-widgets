@@ -3,7 +3,7 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #404040;
     border-radius: 6px;
-    height: 200px;
+    height: 180px;
     width: 300px;
     border: 1.5px solid #ECF0F1;
     display: flex;
@@ -22,6 +22,9 @@
     font-size: 1.25em;
     font-weight: bold;
     padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   #project-list-item .text {
@@ -64,11 +67,20 @@
     font-size: 0.75em;
     letter-spacing: 1.0;
   }
+
+  #project-list-item .link {
+    font-size: 0.8em;
+    color: #1297E0;
+  }
+
 </style>
 
 <div id='project-list-item'>
   <div class='content'>
-    <span class='title'>{{project.title}}</span>
+    <span class='title'>
+      {{project.title}}
+      <a href='balance://project/{{project._id}}' class='link'>view in app</a>
+    </span>
     {{#if isFinished}}
       <div class='message'>This project is finished!</div>
     {{else if project.Past}}
