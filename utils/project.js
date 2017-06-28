@@ -14,6 +14,14 @@ module.exports = (request, reply) => {
   protocolFn.get(`${protocol}://${host}:${port}/projects/${project}`, res => {
     const { statusCode } = res;
 
+    if (statusCode === 403) {
+      return reply({ denied: true });
+    }
+
+    if (statusCode === 500 || statusCode === 404) {
+      return reply({ notFound: true });
+    }
+
     if (statusCode < 200 || statusCode > 299) {
       res.resume();
       return reply(new Error('Request failed with status code: ', statusCode));

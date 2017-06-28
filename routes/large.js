@@ -12,20 +12,21 @@ module.exports = {
       }
     ]
   },
-  handler: (request, reply) => {
-    let lastUpdated = '';
-    let { nudgeUsers } = request.pre.project;
-
-    if (request.pre.project.Past) {
-      lastUpdated = new Date(request.pre.project.Past.lastUpdated).toLocaleDateString();
+  handler: ({ pre }, reply) => {
+    if (pre.project.denied) {
+      return reply.view('large', { denied: true });
+    } else if (pre.project.notFound) {
+      return reply.view('large', { notFound: true });
     }
 
-    if (nudgeUsers.length > 5) {
-      request.pre.project.nudgeUsers = nudgeUsers.slice(0,5);
+    let { nudgeUsers, Past, status, lastUpdated } = pre.project;
+
+    if (nudgeUsers && nudgeUsers.length > 5) {
+      pre.project.nudgeUsers = nudgeUsers.slice(0,5);
     }
 
     function getNudgeText () {
-      const numOfNudgers = nudgeUsers.length;
+      const numOfNudgers = nudgeUsers ? nudgeUsers.length : 0;
 
       switch (true) {
         case (numOfNudgers < 1)   : return null;
@@ -37,11 +38,11 @@ module.exports = {
     }
 
     reply.view('large', {
-      lastUpdated,
+      lastUpdated: new Date(lastUpdated).toLocaleDateString(),
       nudgeText: getNudgeText(),
-      color: statusColor(new Date(request.pre.project.lastUpdated)),
-      isFinished: request.pre.project.status === 'finished',
-      project: request.pre.project
+      color: statusColor(new Date(lastUpdated)),
+      isFinished: status === 'finished',
+      project: pre.project
     });
   }
 };

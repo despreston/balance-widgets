@@ -77,24 +77,34 @@
 
 <div id='project-list-item'>
   <div class='content'>
-    <span class='title'>
-      {{project.title}}
-      <a href='balance://project/{{project._id}}' class='link'>view in app</a>
-    </span>
-    {{#if isFinished}}
-      <div class='message'>This project is finished!</div>
-    {{else if project.Past}}
-      <div>
-        <div class='text'>LATEST COMPLETED</div>
-        <div class='note'>{{project.Past.content}}</div>  
+    {{#if denied}}
+      <div class='message'>
+        This project is private. The owner should set the privacy level to 'Everyone' in the app in order to share this project.
+      </div>
+    {{else if notFound}}
+      <div class='message'>
+        Whoops! There was a problem loading this project.
       </div>
     {{else}}
-      <div class='message'>Nothing done for this project</div>
+      <span class='title'>
+        {{project.title}}
+        <a href='balance://project/{{project._id}}' class='link'>view in app</a>
+      </span>
+      {{#if isFinished}}
+        <div class='message'>This project is finished!</div>
+      {{else if project.Past}}
+        <div>
+          <div class='text'>LATEST COMPLETED</div>
+          <div class='note'>{{project.Past.content}}</div>
+        </div>
+      {{else}}
+        <div class='message'>Nothing done for this project</div>
+      {{/if}}
+      <div class='footer'>
+        {{> avatar-collection users=project.nudgeUsers}}
+        <span class='text nudge-text'>{{nudgeText}}</span>
+      </div>
     {{/if}}
-    <div class='footer'>
-      {{> avatar-collection users=project.nudgeUsers}}
-      <span class='text nudge-text'>{{nudgeText}}</span>
-    </div>
   </div>
   <div class='status'>{{> status}}</div>
 </div>
